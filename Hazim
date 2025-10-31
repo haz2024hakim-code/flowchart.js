@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>مخطط محفظة إلكترونية متقدم</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.15.0/flowchart.min.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  #diagram { width: 100%; height: 100vh; border: 1px solid #ccc; }
+</style>
+</head>
+<body>
+
+<div id="diagram"></div>
+
+<script>
+  // تعريف المخطط بصيغة Flowchart.js
+  const chartCode = `
+st=>start: Start:>http://www.google.com[blank]
+e=>end:>http://www.google.com
+getInfo=>input: Input Info
+op1=>operation: My Operation
+sub1=>subroutine: My Subroutine
+cond=>condition: Yes or No?:>http://www.google.com
+io=>inputoutput: catch something...
+printInfo=>output: Print info
+para=>parallel: parallel tasks
+
+st->getInfo->op1->cond
+cond(yes)->io->printInfo->e
+cond(no)->para
+para(path1, bottom)->sub1(right)->op1
+para(path2, top)->op1
+`;
+
+  // إنشاء المخطط
+  const diagram = flowchart.parse(chartCode);
+
+  // رسم المخطط في العنصر
+  diagram.drawSVG('diagram', {
+    'line-width': 2,
+    'line-length': 50,
+    'text-margin': 10,
+    'font-size': 14,
+    'font-color': 'black',
+    'line-color': '#4CAF50',
+    'element-color': '#2196F3',
+    'fill': 'white',
+    'arrow-end': 'block',
+    'scale': 1
+  });
+</script>
+
+</body>
+</html>
